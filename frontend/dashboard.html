@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Professor Dashboard</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-graduation-cap"></i>
+
+            <div class="logo-text">
+                <h3>AI Professor</h3>
+                <small>Learning Assistant</small>
+            </div>
+        </div>
+
+        <ul class="menu">
+
+            <li id="dashboard-btn" class="active">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </li>
+
+            <li id="chat-btn">
+                <i class="fa-solid fa-robot"></i>
+                <span>AI Professor</span>
+            </li>
+
+            <li id="notes-btn">
+                <i class="fa-solid fa-book"></i>
+                <span>Notes Generator</span>
+            </li>
+
+            <li id="upload-btn">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>PDF Upload</span>
+            </li>
+
+            <li id="quiz-btn">
+                <i class="fa-solid fa-clipboard-question"></i>
+                <span>Quiz Generator</span>
+            </li>
+
+            <li id="progress-btn">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Progress Tracker</span>
+            </li>
+
+            <li id="voice-btn">
+                <i class="fa-solid fa-microphone"></i>
+                <span>Voice Professor</span>
+            </li>
+
+            <li id="cloud-btn">
+                <i class="fa-solid fa-cloud"></i>
+                <span>Cloud Storage</span>
+            </li>
+
+            <li id="settings-btn">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+
+        <!-- Topbar -->
+        <div class="topbar">
+
+            <div class="left">
+
+                <button id="toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="search">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Search anything...">
+                </div>
+
+            </div>
+
+            <div class="right">
+
+                <button class="icon-btn">
+                    <i class="fa-solid fa-bell"></i>
+                </button>
+
+                <div class="profile">
+                    <img src="https://i.pravatar.cc/40" alt="">
+                    <span>Student</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Welcome -->
+        <div class="welcome">
+            <h1>Welcome Back 👋</h1>
+            <p>Continue your learning journey with AI Professor.</p>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+
+    <h2>Quick Actions</h2>
+
+    <div class="action-grid">
+
+        <button
+            class="action-btn"
+            id="quick-chat">
+
+            🤖 Start AI Chat
+
+        </button>
+
+        <button
+            class="action-btn"
+            id="quick-upload">
+
+            📄 Upload PDF
+
+        </button>
+
+        <button
+            class="action-btn"
+            id="quick-quiz">
+
+            📝 Generate Quiz
+
+        </button>
+
+        <button
+            class="action-btn"
+            id="quick-notes">
+
+            📚 Create Notes
+
+        </button>
+
+    </div>
+
+</div>
+
+            <!-- Recent Activity -->
+            <div class="recent">
+
+    <h2>Recent Activity</h2>
+
+    <div id="activity-list">
+
+    </div>
+
+</div>
+
+        <!-- Dynamic Content -->
+        <div id="content-area">
+
+            <!-- Dashboard -->
+            <div id="dashboard-page">
+
+                <h2>Dashboard Overview</h2>
+
+                <br>
+
+                <div class="cards">
+
+                    <div class="card">
+                        <div class="card-icon">🤖</div>
+                        <h3>AI Chats</h3>
+                        <h1 id="dashboard-chat">0</h1>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">📚</div>
+                        <h3>Notes</h3>
+                        <h1 id="dashboard-notes">0</h1>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">📝</div>
+                        <h3>Quizzes</h3>
+                        <h1 id="dashboard-quiz">0</h1>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">📄</div>
+                        <h3>Uploads</h3>
+                        <h1 id="dashboard-pdf">0</h1>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- AI Chat -->
+            <div id="chat-page" class="hidden">
+
+    <div class="chat-header">
+        <h2>🤖 AI Professor</h2>
+        <span>Online</span>
+    </div>
+
+    <div class="chat-body" id="chat-body">
+
+        <div class="ai-message">
+            Hello! 👋 I'm your AI Professor. Ask me anything.
+        </div>
+
+    </div>
+
+    <div class="chat-input">
+
+        <input
+            type="text"
+            id="user-input"
+            placeholder="Ask your professor anything..."
+        >
+
+        <button id="send-btn">
+            <i class="fa-solid fa-paper-plane"></i>
+        </button>
+
+    </div>
+
+</div>
+
+            <!-- Notes -->
+            <div id="notes-page" class="hidden">
+
+    <h2>📚 Notes Generator</h2>
+
+    <div class="notes-form">
+
+        <input
+            type="text"
+            id="notes-topic"
+            placeholder="Enter topic (Example: Machine Learning)"
+        >
+
+        <select id="notes-level">
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+        </select>
+
+        <select id="notes-length">
+            <option>Short</option>
+            <option>Medium</option>
+            <option>Detailed</option>
+        </select>
+
+        <button id="generate-notes">
+            Generate Notes
+        </button>
+        <button id="download-notes">
+    Download PDF
+</button>
+
+    </div>
+
+    <div id="notes-output">
+
+        Your generated notes will appear here.
+
+    </div>
+
+</div>
+
+            <!-- Upload -->
+            <div id="upload-page" class="hidden">
+
+    <h2>📄 PDF Upload & Study</h2>
+
+    <div class="upload-section">
+
+        <input
+            type="file"
+            id="pdf-file"
+            accept=".pdf"
+        >
+
+        <button id="upload-pdf">
+            Upload PDF
+        </button>
+
+    </div>
+
+    <div class="pdf-chat">
+
+        <input
+            type="text"
+            id="pdf-question"
+            placeholder="Ask question about uploaded PDF"
+        >
+
+        <button id="ask-pdf">
+            Ask PDF
+        </button>
+
+    </div>
+
+    <div id="pdf-output">
+        Upload a PDF to begin.
+    </div>
+
+</div>
+
+            <!-- Quiz -->
+            <div id="quiz-page" class="hidden">
+
+    <h2>📝 Quiz Generator</h2>
+
+    <div class="notes-form">
+
+        <input
+            type="text"
+            id="quiz-topic"
+            placeholder="Enter topic"
+        >
+
+        <select id="quiz-level">
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+        </select>
+
+        <select id="quiz-count">
+            <option>5</option>
+            <option>10</option>
+            <option>15</option>
+        </select>
+
+        <button id="generate-quiz">
+            Generate Quiz
+        </button>
+
+    </div>
+
+    <div id="quiz-output">
+        Quiz will appear here.
+    </div>
+
+</div>
+
+            <!-- Progress -->
+            <div id="progress-page" class="hidden">
+
+    <h2>📊 Progress Tracker</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>AI Chats</h3>
+            <h1 id="chat-count">0</h1>
+        </div>
+
+        <div class="card">
+            <h3>Notes</h3>
+            <h1 id="notes-count">0</h1>
+        </div>
+
+        <div class="card">
+            <h3>Quizzes</h3>
+            <h1 id="quiz-count-view">0</h1>
+        </div>
+
+        <div class="card">
+            <h3>PDF Uploads</h3>
+            <h1 id="pdf-count">0</h1>
+        </div>
+
+    </div>
+
+</div>
+
+            <!-- Voice -->
+            <div id="voice-page" class="hidden">
+
+    <h2>🎤 Voice Professor</h2>
+
+    <div class="voice-container">
+
+        <button id="start-voice">
+            🎤 Start Speaking
+        </button>
+
+        <div id="voice-text">
+            Click the microphone and speak.
+        </div>
+
+        <div id="voice-answer">
+            AI response will appear here.
+        </div>
+
+    </div>
+
+</div>
+
+            <!-- Cloud -->
+            <div id="cloud-page" class="hidden">
+                <h2>☁️ Cloud Storage</h2>
+                <p>Manage uploaded files.</p>
+            </div>
+
+            <!-- Settings -->
+            <div id="settings-page" class="hidden">
+                <h2>⚙️ Settings</h2>
+                <p>Manage your account.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/sidebar.js"></script>
+
+</body>
+</html>
