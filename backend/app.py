@@ -1,6 +1,4 @@
-from flask import Flask, request, jsonify, send_file
-from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask import Flask, request, jsonify, send_file, render_template
 from datetime import datetime
 from flask_cors import CORS
 import google.generativeai as genai
@@ -9,7 +7,6 @@ from pypdf import PdfReader
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 import os
-
 # =========================
 # Load Environment
 # =========================
@@ -18,10 +15,8 @@ load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+os.makedirs('instance', exist_ok=True)
 
-db = SQLAlchemy(app)
 
 # =========================
 # Gemini Setup
@@ -49,121 +44,18 @@ stats = {
     "pdf": 0
 }
 activities = []
-# =========================
-# User Database
-# =========================
 
-class User(db.Model):
-
-    id = db.Column(
-        db.Integer,
-        primary_key=True
-    )
-
-    email = db.Column(
-        db.String(100),
-        unique=True,
-        nullable=False
-    )
-
-    password = db.Column(
-        db.String(300),
-        nullable=False
-    )
 # =========================
 # Home Route
 # =========================
 # =========================
-# Register
+# Home Route
 # =========================
 
-@app.route('/register', methods=['POST'])
-def register():
-
-    try:
-
-        data = request.json
-
-        existing = User.query.filter_by(
-            email=data['email']
-        ).first()
-
-        if existing:
-
-            return jsonify({
-                "message":
-                "Email already exists"
-            })
-
-        user = User(
-            email=data['email'],
-            password=generate_password_hash(
-                data['password']
-            )
-        )
-
-        db.session.add(user)
-        db.session.commit()
-
-        return jsonify({
-            "message":
-            "Registration successful"
-        })
-
-    except Exception as e:
-
-        return jsonify({
-            "message":
-            str(e)
-        })
-
-
-# =========================
-# Login
-# =========================
-
-@app.route('/login', methods=['POST'])
-def login():
-
-    try:
-
-        data = request.json
-
-        user = User.query.filter_by(
-            email=data['email']
-        ).first()
-
-        if not user:
-
-            return jsonify({
-                "message":
-                "User not found"
-            })
-
-        if check_password_hash(
-            user.password,
-            data['password']
-        ):
-
-            return jsonify({
-                "message":
-                "Login successful"
-            })
-
-        return jsonify({
-            "message":
-            "Wrong password"
-        })
-
-    except Exception as e:
-
-        return jsonify({
-            "message":
-            str(e)
-        })
 @app.route('/')
 def home():
-    return "AI Professor Backend Running"
+    return render_template('dashboard.html')
+
 
 
 # =========================
@@ -502,7 +394,8 @@ def get_activities():
 # =========================
 if __name__ == "__main__":
 
-    with app.app_context():
-        db.create_all()
-
-    app.run(debug=True)
+    app.run(
+    host="0.0.0.0",
+    port=5000,
+    debug=True
+)
