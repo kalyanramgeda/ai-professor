@@ -132,7 +132,7 @@ async function sendMessage() {
 
         const response =
             await fetch(
-                'http://127.0.0.1:5000/chat',
+                '/chat',
                 {
                     method: 'POST',
                     headers: {
@@ -206,7 +206,7 @@ notesBtn?.addEventListener(
 
         const response =
             await fetch(
-                'http://127.0.0.1:5000/notes',
+                '/notes',
                 {
                     method:'POST',
                     headers:{
@@ -252,7 +252,7 @@ quizBtn?.addEventListener(
 
         const response =
             await fetch(
-                'http://127.0.0.1:5000/quiz',
+                '/quiz',
                 {
                     method:'POST',
                     headers:{
@@ -295,7 +295,7 @@ async ()=>{
 
     const response =
         await fetch(
-            'http://127.0.0.1:5000/upload_pdf',
+            '/upload_pdf',
             {
                 method:'POST',
                 body:form
@@ -325,7 +325,7 @@ async ()=>{
 
     const response =
         await fetch(
-            'http://127.0.0.1:5000/ask_pdf',
+            '/ask_pdf',
             {
                 method:'POST',
                 headers:{
@@ -377,7 +377,7 @@ voiceBtn?.addEventListener(
 
         const response =
             await fetch(
-                'http://127.0.0.1:5000/chat',
+                '/chat',
                 {
                     method:'POST',
                     headers:{
@@ -414,7 +414,7 @@ document
 ()=>{
 
     window.open(
-        'http://127.0.0.1:5000/download_notes',
+        '/download_notes',
         '_blank'
     );
 
@@ -503,7 +503,7 @@ async function updateDashboard(){
 
         const response =
             await fetch(
-                'http://127.0.0.1:5000/progress'
+                '/progress'
             );
 
         const data =
@@ -549,7 +549,7 @@ async function updateActivities(){
 
     const response =
         await fetch(
-            'http://127.0.0.1:5000/activities'
+            '/activities'
         );
 
     const data =
